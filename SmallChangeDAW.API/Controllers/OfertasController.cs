@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using SmallChangeDAW.Core.DTOs;
-using SmallChangeDAW.Core.Interfaces;
+using SmallChangeDAW.CORE.Core.DTOs;
+using SmallChangeDAW.CORE.Core.Interfaces;
 
 namespace SmallChangeDAW.Controllers;
 

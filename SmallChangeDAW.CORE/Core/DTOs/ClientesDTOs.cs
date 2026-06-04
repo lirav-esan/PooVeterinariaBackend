@@ -1,4 +1,4 @@
-namespace SmallChangeDAW.Core.DTOs;
+namespace SmallChangeDAW.CORE.Core.DTOs;
 
 public class CreateClienteDTO
 {

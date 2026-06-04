@@ -1,7 +1,7 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
 
-namespace SmallChangeDAW.Infrastructure.Data;
+namespace SmallChangeDAW.CORE.Infrastructure.Data;
 
 public class DbConnectionFactory
 {

@@ -1,9 +1,9 @@
 using Dapper;
-using SmallChangeDAW.Core.Interfaces;
-using SmallChangeDAW.Infrastructure.Data;
-using SmallChangeDAW.Models;
+using SmallChangeDAW.CORE.Core.Interfaces;
+using SmallChangeDAW.CORE.Infrastructure.Data;
+using SmallChangeDAW.CORE.Models;
 
-namespace SmallChangeDAW.Infrastructure.Repositories;
+namespace SmallChangeDAW.CORE.Infrastructure.Repositories;
 
 public class OfertasRepository : IOfertasRepository
 {
@@ -40,12 +40,13 @@ public class OfertasRepository : IOfertasRepository
     {
         using var connection = _connectionFactory.CreateConnection();
         var sql = @"UPDATE Ofertas SET
-                        cliente_id = @ClienteId,
-                        moneda_a_enviar = @MonedaAEnviar,
-                        moneda_a_recibir = @MonedaARecibir,
-                        tipo_cambio = @TipoCambio,
-                        estado = @Estado
-                    WHERE id = @Id";
+                    cliente_id = @cliente_id,
+                    moneda_a_enviar = @moneda_a_enviar,
+                    moneda_a_recibir = @moneda_a_recibir,
+                    tipo_cambio = @tipo_cambio,
+                    estado = @estado
+                WHERE id = @id";
+
         var rowsAffected = await connection.ExecuteAsync(sql, oferta);
         return rowsAffected > 0;
     }

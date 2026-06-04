@@ -7,14 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Core\**" />
-    <Compile Remove="Infrastructure\**" />
-    <Content Remove="Core\**" />
-    <Content Remove="Infrastructure\**" />
-    <EmbeddedResource Remove="Core\**" />
-    <EmbeddedResource Remove="Infrastructure\**" />
-    <None Remove="Core\**" />
-    <None Remove="Infrastructure\**" />
+    <ProjectReference Include="..\SmallChangeDAW.CORE\SmallChangeDAW.CORE.csproj" />
   </ItemGroup>
 
   <ItemGroup>

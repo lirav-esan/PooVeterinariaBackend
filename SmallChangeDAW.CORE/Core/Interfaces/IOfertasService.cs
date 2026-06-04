@@ -1,6 +1,6 @@
-using SmallChangeDAW.Core.DTOs;
+using SmallChangeDAW.CORE.Core.DTOs;
 
-namespace SmallChangeDAW.Core.Interfaces;
+namespace SmallChangeDAW.CORE.Core.Interfaces;
 
 public interface IOfertasService
 {

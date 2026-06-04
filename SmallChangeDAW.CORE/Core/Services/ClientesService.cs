@@ -1,6 +1,6 @@
-using SmallChangeDAW.Core.DTOs;
-using SmallChangeDAW.Core.Interfaces;
-using SmallChangeDAW.Models;
+using SmallChangeDAW.CORE.Core.DTOs;
+using SmallChangeDAW.CORE.Core.Interfaces;
+using SmallChangeDAW.CORE.Models;
 
 namespace SmallChangeDAW.CORE.Core.Services;
 

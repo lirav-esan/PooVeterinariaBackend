@@ -1,7 +1,7 @@
-using SmallChangeDAW.Core.Interfaces;
-using SmallChangeDAW.Infrastructure.Data;
-using SmallChangeDAW.Infrastructure.Repositories;
-using SmallChangeDAW.Infrastructure.Services;
+using SmallChangeDAW.CORE.Core.Interfaces;
+using SmallChangeDAW.CORE.Infrastructure.Data;
+using SmallChangeDAW.CORE.Infrastructure.Repositories;
+using SmallChangeDAW.CORE.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 builder.Services.AddSingleton(sp =>
     new DbConnectionFactory(builder.Configuration.GetConnectionString("DefaultConnection")!));
 builder.Services.AddScoped<IClientesRepository, ClientesRepository>();

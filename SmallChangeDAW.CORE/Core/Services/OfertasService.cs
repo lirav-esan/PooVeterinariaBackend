@@ -1,6 +1,6 @@
-using SmallChangeDAW.Core.DTOs;
-using SmallChangeDAW.Core.Interfaces;
-using SmallChangeDAW.Models;
+using SmallChangeDAW.CORE.Core.DTOs;
+using SmallChangeDAW.CORE.Core.Interfaces;
+using SmallChangeDAW.CORE.Models;
 
 namespace SmallChangeDAW.CORE.Core.Services;
 
@@ -35,40 +35,29 @@ public class OfertasService : IOfertasService
 
         var oferta = new Oferta
         {
-            ClienteId = createDto.ClienteId,
-            MonedaAEnviar = createDto.MonedaAEnviar,
-            MonedaARecibir = createDto.MonedaARecibir,
-            TipoCambio = createDto.TipoCambio,
-            Estado = true
+            cliente_id = createDto.ClienteId,
+            moneda_a_enviar = createDto.MonedaAEnviar,
+            moneda_a_recibir = createDto.MonedaARecibir,
+            tipo_cambio = createDto.TipoCambio,
+            estado = true
         };
 
-        oferta.Id = await _ofertasRepository.AddAsync(oferta);
+        oferta.id = await _ofertasRepository.AddAsync(oferta);
         return MapToDTO(oferta);
     }
 
     public async Task<bool> UpdateAsync(int id, UpdateOfertaDTO updateDto)
     {
-        var existing = await _ofertasRepository.GetByIdAsync(id);
-        if (existing is null)
-            return false;
+        var ofertaExistente = await _ofertasRepository.GetByIdAsync(id);
+        if (ofertaExistente == null) return false;
 
-        if (updateDto.ClienteId is not null)
-        {
-            var cliente = await _clientesRepository.GetByIdAsync(updateDto.ClienteId.Value);
-            if (cliente is null)
-                throw new KeyNotFoundException($"El cliente con ID {updateDto.ClienteId} no existe.");
-            existing.ClienteId = updateDto.ClienteId.Value;
-        }
-        if (updateDto.MonedaAEnviar is not null)
-            existing.MonedaAEnviar = updateDto.MonedaAEnviar;
-        if (updateDto.MonedaARecibir is not null)
-            existing.MonedaARecibir = updateDto.MonedaARecibir;
-        if (updateDto.TipoCambio is not null)
-            existing.TipoCambio = updateDto.TipoCambio.Value;
-        if (updateDto.Estado is not null)
-            existing.Estado = updateDto.Estado.Value;
+        ofertaExistente.cliente_id = updateDto.ClienteId ?? 0;
+        ofertaExistente.moneda_a_enviar = updateDto.MonedaAEnviar ?? string.Empty;
+        ofertaExistente.moneda_a_recibir = updateDto.MonedaARecibir ?? string.Empty;
+        ofertaExistente.tipo_cambio = updateDto.TipoCambio ?? 0m;
+        ofertaExistente.estado = updateDto.Estado ?? false;
 
-        return await _ofertasRepository.UpdateAsync(existing);
+        return await _ofertasRepository.UpdateAsync(ofertaExistente);
     }
 
     public async Task<bool> DeleteAsync(int id)
@@ -80,13 +69,13 @@ public class OfertasService : IOfertasService
     {
         return new OfertaResponseDTO
         {
-            Id = oferta.Id,
-            ClienteId = oferta.ClienteId,
-            MonedaAEnviar = oferta.MonedaAEnviar,
-            MonedaARecibir = oferta.MonedaARecibir,
-            TipoCambio = oferta.TipoCambio,
-            Estado = oferta.Estado,
-            FechaCreacion = oferta.FechaCreacion
+            Id = oferta.id,
+            ClienteId = oferta.cliente_id,
+            MonedaAEnviar = oferta.moneda_a_enviar,
+            MonedaARecibir = oferta.moneda_a_recibir,
+            TipoCambio = oferta.tipo_cambio,
+            Estado = oferta.estado,
+            FechaCreacion = oferta.fecha_creacion
         };
     }
 }

@@ -1,4 +1,4 @@
-namespace SmallChangeDAW.Models;
+namespace SmallChangeDAW.CORE.Models;
 
 public class Cliente
 {

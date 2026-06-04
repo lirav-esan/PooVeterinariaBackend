@@ -1,9 +1,9 @@
 using Dapper;
-using SmallChangeDAW.Core.Interfaces;
-using SmallChangeDAW.Infrastructure.Data;
-using SmallChangeDAW.Models;
+using SmallChangeDAW.CORE.Core.Interfaces;
+using SmallChangeDAW.CORE.Infrastructure.Data;
+using SmallChangeDAW.CORE.Models;
 
-namespace SmallChangeDAW.Infrastructure.Repositories;
+namespace SmallChangeDAW.CORE.Infrastructure.Repositories;
 
 public class ClientesRepository : IClientesRepository
 {

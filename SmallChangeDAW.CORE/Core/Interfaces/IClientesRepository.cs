@@ -1,6 +1,6 @@
-using SmallChangeDAW.Models;
+using SmallChangeDAW.CORE.Models;
 
-namespace SmallChangeDAW.Core.Interfaces;
+namespace SmallChangeDAW.CORE.Core.Interfaces;
 
 public interface IClientesRepository
 {
