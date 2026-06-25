@@ -56,14 +56,25 @@ builder.Services.AddScoped<ITransaccionesService, TransaccionesService>();
 // Registrar el nuevo servicio de Autenticación
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:9000") // El puerto de tu frontend Quasar
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
 
-// =======================================================
-// MIDDLEWARES DE SEGURIDAD (El orden es vital)
-// =======================================================
+app.UseCors("PermitirFrontend");
+
+// MIDDLEWARES DE SEGURIDAD
 app.UseAuthentication(); // 1. Verifica quién eres (valida el token)
 app.UseAuthorization();  // 2. Verifica si tienes permiso
 

@@ -27,23 +27,45 @@ public class OfertasService : IOfertasService
         return oferta is null ? null : MapToDTO(oferta);
     }
 
-    public async Task<OfertaResponseDTO> AddAsync(CreateOfertaDTO createDto)
+    public async Task<OfertaResponseDTO> AddAsync(CreateOfertaDTO createDto, int clienteId)
     {
-        var cliente = await _clientesRepository.GetByIdAsync(createDto.ClienteId);
+        var cliente = await _clientesRepository.GetByIdAsync(clienteId);
         if (cliente is null)
-            throw new KeyNotFoundException($"El cliente con ID {createDto.ClienteId} no existe.");
+            throw new KeyNotFoundException($"El cliente con ID {clienteId} no existe.");
 
         var oferta = new Oferta
         {
-            cliente_id = createDto.ClienteId,
+            cliente_id = clienteId,
             moneda_a_enviar = createDto.MonedaAEnviar,
             moneda_a_recibir = createDto.MonedaARecibir,
+
+            // ASIGNACIÓN OBLIGATORIA
+            cantidad = createDto.Cantidad,
+
             tipo_cambio = createDto.TipoCambio,
             estado = true
         };
 
         oferta.id = await _ofertasRepository.AddAsync(oferta);
         return MapToDTO(oferta);
+    }
+
+    private static OfertaResponseDTO MapToDTO(Oferta oferta)
+    {
+        return new OfertaResponseDTO
+        {
+            Id = oferta.id,
+            ClienteId = oferta.cliente_id,
+            MonedaAEnviar = oferta.moneda_a_enviar,
+            MonedaARecibir = oferta.moneda_a_recibir,
+
+            // MAPEADO DE RETORNO
+            Cantidad = oferta.cantidad,
+
+            TipoCambio = oferta.tipo_cambio,
+            Estado = oferta.estado,
+            FechaCreacion = oferta.fecha_creacion
+        };
     }
 
     public async Task<bool> UpdateAsync(int id, UpdateOfertaDTO updateDto)
@@ -63,19 +85,5 @@ public class OfertasService : IOfertasService
     public async Task<bool> DeleteAsync(int id)
     {
         return await _ofertasRepository.DeleteAsync(id);
-    }
-
-    private static OfertaResponseDTO MapToDTO(Oferta oferta)
-    {
-        return new OfertaResponseDTO
-        {
-            Id = oferta.id,
-            ClienteId = oferta.cliente_id,
-            MonedaAEnviar = oferta.moneda_a_enviar,
-            MonedaARecibir = oferta.moneda_a_recibir,
-            TipoCambio = oferta.tipo_cambio,
-            Estado = oferta.estado,
-            FechaCreacion = oferta.fecha_creacion
-        };
     }
 }
