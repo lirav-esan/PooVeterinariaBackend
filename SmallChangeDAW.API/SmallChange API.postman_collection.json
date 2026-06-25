@@ -1,11 +1,11 @@
 {
   "info": {
-    "_postman_id": "d25cb4bb-6c84-4332-925e-9e73f9df67f3",
+    "_postman_id": "be7f066b-a65f-4cd0-8760-c5238bac4f05",
     "name": "SmallChangeDAW API",
     "description": "Colección de endpoints para Clientes y Ofertas de SmallChangeDAW",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "54272577",
-    "_collection_link": "https://go.postman.co/collection/54272577-d25cb4bb-6c84-4332-925e-9e73f9df67f3?source=collection_link"
+    "_exporter_id": "54272533",
+    "_collection_link": "https://go.postman.co/collection/54272533-be7f066b-a65f-4cd0-8760-c5238bac4f05?source=collection_link"
   },
   "item": [
     {
@@ -35,14 +35,14 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/api/clientes/2",
+              "raw": "{{baseUrl}}/api/clientes/1",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "clientes",
-                "2"
+                "1"
               ]
             }
           },
@@ -60,7 +60,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nombre\": \"Lucas\",\n  \"email\": \"weq@ejemplo.com\",\n  \"passHash\": \"hash_de_contraseña_123\"\n}"
+              "raw": "{\n  \"nombre\": \"Pedro\",\n  \"email\": \"lolwa@ejemplo.com\",\n  \"passHash\": \"hash_de_contraseña_321\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/clientes",
@@ -338,7 +338,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"OfertaId\": 2,\n  \"ClienteCompradorId\": 5,\n  \"estado\": \"pendiente\"\n}"
+              "raw": "{\n  \"OfertaId\": 1,\n  \"ClienteCompradorId\": 2,\n  \"estado\": \"pendiente\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/transacciones",
@@ -465,6 +465,67 @@
                   "key": "app_id",
                   "value": "\"e364682b1ebe491594591fa7176393e3\""
                 }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Autenticación",
+      "item": [
+        {
+          "name": "Registro",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombre\": \"67Seveneitor666\",\r\n  \"email\": \"67Seveneitor666@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/registro",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "registro"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"67Seveneitor666@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
               ]
             }
           },
