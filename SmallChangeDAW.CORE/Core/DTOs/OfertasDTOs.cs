@@ -10,9 +10,9 @@ public class CreateOfertaDTO
 
 public class UpdateOfertaDTO
 {
-    public int? ClienteId { get; set; }
     public string? MonedaAEnviar { get; set; }
     public string? MonedaARecibir { get; set; }
+    public decimal? Cantidad { get; set; }
     public decimal? TipoCambio { get; set; }
     public bool? Estado { get; set; }
 }

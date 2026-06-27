@@ -42,7 +42,7 @@ public class OfertasController : ControllerBase
     {
         try
         {
-            // Extraemos el ID del usuario directamente del token (es más seguro que confiar en el Frontend)
+            // Extraemos el ID del usuario directamente del token
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (userIdClaim == null) return Unauthorized();

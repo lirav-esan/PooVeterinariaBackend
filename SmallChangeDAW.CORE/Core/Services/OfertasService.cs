@@ -38,16 +38,42 @@ public class OfertasService : IOfertasService
             cliente_id = clienteId,
             moneda_a_enviar = createDto.MonedaAEnviar,
             moneda_a_recibir = createDto.MonedaARecibir,
-
-            // ASIGNACIÓN OBLIGATORIA
             cantidad = createDto.Cantidad,
-
             tipo_cambio = createDto.TipoCambio,
-            estado = true
+            estado = true,
+            fecha_creacion = DateTime.UtcNow
         };
 
         oferta.id = await _ofertasRepository.AddAsync(oferta);
         return MapToDTO(oferta);
+    }
+
+    public async Task<bool> UpdateAsync(int id, UpdateOfertaDTO updateDto)
+    {
+        var ofertaExistente = await _ofertasRepository.GetByIdAsync(id);
+        if (ofertaExistente == null) return false;
+
+        if (updateDto.MonedaAEnviar != null)
+            ofertaExistente.moneda_a_enviar = updateDto.MonedaAEnviar;
+
+        if (updateDto.MonedaARecibir != null)
+            ofertaExistente.moneda_a_recibir = updateDto.MonedaARecibir;
+
+        if (updateDto.Cantidad != null)
+            ofertaExistente.cantidad = updateDto.Cantidad.Value;
+
+        if (updateDto.TipoCambio != null)
+            ofertaExistente.tipo_cambio = updateDto.TipoCambio.Value;
+
+        if (updateDto.Estado != null)
+            ofertaExistente.estado = updateDto.Estado.Value;
+
+        return await _ofertasRepository.UpdateAsync(ofertaExistente);
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        return await _ofertasRepository.DeleteAsync(id);
     }
 
     private static OfertaResponseDTO MapToDTO(Oferta oferta)
@@ -58,32 +84,10 @@ public class OfertasService : IOfertasService
             ClienteId = oferta.cliente_id,
             MonedaAEnviar = oferta.moneda_a_enviar,
             MonedaARecibir = oferta.moneda_a_recibir,
-
-            // MAPEADO DE RETORNO
             Cantidad = oferta.cantidad,
-
             TipoCambio = oferta.tipo_cambio,
             Estado = oferta.estado,
             FechaCreacion = oferta.fecha_creacion
         };
-    }
-
-    public async Task<bool> UpdateAsync(int id, UpdateOfertaDTO updateDto)
-    {
-        var ofertaExistente = await _ofertasRepository.GetByIdAsync(id);
-        if (ofertaExistente == null) return false;
-
-        ofertaExistente.cliente_id = updateDto.ClienteId ?? 0;
-        ofertaExistente.moneda_a_enviar = updateDto.MonedaAEnviar ?? string.Empty;
-        ofertaExistente.moneda_a_recibir = updateDto.MonedaARecibir ?? string.Empty;
-        ofertaExistente.tipo_cambio = updateDto.TipoCambio ?? 0m;
-        ofertaExistente.estado = updateDto.Estado ?? false;
-
-        return await _ofertasRepository.UpdateAsync(ofertaExistente);
-    }
-
-    public async Task<bool> DeleteAsync(int id)
-    {
-        return await _ofertasRepository.DeleteAsync(id);
     }
 }
