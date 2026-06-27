@@ -89,7 +89,7 @@ public partial class SmallChangeDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("GETUTCDATE()");
 
-            entity.HasOne<Cliente>()
+            entity.HasOne(e => e.Cliente)
                 .WithMany()
                 .HasForeignKey(e => e.cliente_id)
                 .OnDelete(DeleteBehavior.Restrict)
