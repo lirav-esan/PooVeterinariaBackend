@@ -1,3 +1,4 @@
+using SmallChangeDAW.CORE.Core.DTOs;
 using SmallChangeDAW.CORE.Core.Interfaces;
 using SmallChangeDAW.CORE.Infrastructure.Data;
 using SmallChangeDAW.CORE.Infrastructure.Repositories;
