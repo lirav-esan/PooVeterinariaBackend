@@ -1,0 +1,174 @@
+### PatitasVet API - Ejemplos de Uso
+
+@baseUrl = http://localhost:5000
+@contentType = application/json
+
+## ============================================
+## CLIENTES ENDPOINTS
+## ============================================
+
+### GET - Obtener todos los clientes
+GET {{baseUrl}}/api/clientes
+
+### GET - Buscar clientes por término
+GET {{baseUrl}}/api/clientes?search=juan
+
+### GET - Obtener cliente específico
+GET {{baseUrl}}/api/clientes/C001
+
+### POST - Crear nuevo cliente
+POST {{baseUrl}}/api/clientes
+Content-Type: {{contentType}}
+
+{
+  "id": "C001",
+  "nombre": "Juan",
+  "apellidos": "Pérez García",
+  "fechaNacimiento": "1985-03-15",
+  "genero": "M",
+  "tipoDoc": "D",
+  "numDocumento": "12345678",
+  "direccion": "Calle Principal 123",
+  "telefono": "987654321",
+  "correo": "juan@example.com",
+  "ciudad": "Lima",
+  "distrito": "San Isidro",
+  "estadoCliente": "A"
+}
+
+### PUT - Actualizar cliente
+PUT {{baseUrl}}/api/clientes/C001
+Content-Type: {{contentType}}
+
+{
+  "nombre": "Juan Carlos",
+  "apellidos": "Pérez García",
+  "telefono": "987654329",
+  "correo": "juancarlos@example.com",
+  "ciudad": "San Isidro"
+}
+
+### DELETE - Eliminar cliente
+DELETE {{baseUrl}}/api/clientes/C001
+
+## ============================================
+## PACIENTES ENDPOINTS
+## ============================================
+
+### GET - Obtener todos los pacientes
+GET {{baseUrl}}/api/pacientes
+
+### GET - Buscar pacientes por término
+GET {{baseUrl}}/api/pacientes?search=peludo
+
+### GET - Obtener paciente específico
+GET {{baseUrl}}/api/pacientes/P001
+
+### GET - Obtener pacientes de un cliente
+GET {{baseUrl}}/api/pacientes/cliente/C001
+
+### POST - Crear nuevo paciente
+POST {{baseUrl}}/api/pacientes
+Content-Type: {{contentType}}
+
+{
+  "id": "P001",
+  "idTitular": "C001",
+  "nombre": "Max",
+  "apellidos": "Pérez",
+  "tipo": "T001",
+  "fechaNacimiento": "2020-05-20",
+  "sexo": "M",
+  "color": "Blanco y negro",
+  "esterilizado": true,
+  "longitud": 60,
+  "altura": 40,
+  "peso": 25,
+  "morfologia": "Mediano",
+  "grupoSanguineo": "DEA",
+  "microchip": true,
+  "tatuaje": false,
+  "observaciones": "Perro activo, no agresivo"
+}
+
+### PUT - Actualizar paciente
+PUT {{baseUrl}}/api/pacientes/P001
+Content-Type: {{contentType}}
+
+{
+  "nombre": "Max",
+  "color": "Blanco, negro y marrón",
+  "peso": 26,
+  "observaciones": "Perro muy activo, sociable"
+}
+
+### DELETE - Eliminar paciente
+DELETE {{baseUrl}}/api/pacientes/P001
+
+## ============================================
+## REGISTROS ENDPOINTS
+## ============================================
+
+### GET - Obtener todos los registros
+GET {{baseUrl}}/api/registros
+
+### GET - Obtener registro específico
+GET {{baseUrl}}/api/registros/R001
+
+### GET - Obtener registros de un paciente
+GET {{baseUrl}}/api/registros/paciente/P001
+
+### GET - Obtener registros de un empleado
+GET {{baseUrl}}/api/registros/empleado/E001
+
+### GET - Obtener registros por rango de fechas
+GET {{baseUrl}}/api/registros/rango?startDate=2024-01-01&endDate=2024-12-31
+
+### POST - Crear nuevo registro
+POST {{baseUrl}}/api/registros
+Content-Type: {{contentType}}
+
+{
+  "id": "R001",
+  "fecha": "2024-01-15",
+  "hora": "14:30:00",
+  "idMascota": "P001",
+  "idEmpleado": "E001"
+}
+
+### PUT - Actualizar registro
+PUT {{baseUrl}}/api/registros/R001
+Content-Type: {{contentType}}
+
+{
+  "fecha": "2024-01-16",
+  "hora": "15:00:00",
+  "idEmpleado": "E002"
+}
+
+### DELETE - Eliminar registro
+DELETE {{baseUrl}}/api/registros/R001
+
+## ============================================
+## NOTAS IMPORTANTES
+## ============================================
+
+# IDs esperados:
+# - Clientes: C001, C002, etc.
+# - Pacientes: P001, P002, etc.
+# - Registros: R001, R002, etc.
+# - Empleados: E001, E002, etc.
+# - Tipos Mascota: T001, T002, etc.
+
+# Estados de cliente:
+# - A: Activo
+# - I: Inactivo
+
+# Género:
+# - M: Masculino
+# - F: Femenino
+
+# Tipo de documento:
+# - D: DNI
+# - P: Pasaporte
+# - C: Carnet
